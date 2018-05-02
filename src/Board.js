@@ -18,29 +18,34 @@
       }
     },
 
+    //returns the board array
     rows: function() {
       return _(_.range(this.get('n'))).map(function(rowIndex) {
         return this.get(rowIndex);
       }, this);
     },
 
+    //add or take away piece on board
     togglePiece: function(rowIndex, colIndex) {
       this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex];
       this.trigger('change');
     },
 
+    //gets index of column to left of coordinate
     _getFirstRowColumnIndexForMajorDiagonalOn: function(rowIndex, colIndex) {
       return colIndex - rowIndex;
     },
-
+    //gets index of column to right of coordinate
     _getFirstRowColumnIndexForMinorDiagonalOn: function(rowIndex, colIndex) {
       return colIndex + rowIndex;
     },
 
+    //Checks for conlficts in row and columns
     hasAnyRooksConflicts: function() {
       return this.hasAnyRowConflicts() || this.hasAnyColConflicts();
     },
 
+    //checks if any conflicts for Queen at specific coordinates (false if no conflicts)
     hasAnyQueenConflictsOn: function(rowIndex, colIndex) {
       return (
         this.hasRowConflictAt(rowIndex) ||
@@ -50,10 +55,12 @@
       );
     },
 
+    //Checks if any conflicts exist for Queen (checks for rook conflicts plus diagonals)
     hasAnyQueensConflicts: function() {
       return this.hasAnyRooksConflicts() || this.hasAnyMajorDiagonalConflicts() || this.hasAnyMinorDiagonalConflicts();
     },
 
+    //checks if coordinates are within board
     _isInBounds: function(rowIndex, colIndex) {
       return (
         0 <= rowIndex && rowIndex < this.get('n') &&
@@ -79,12 +86,22 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      //if more than 1 piece exists in
+      // this.row()[rowIndex].includes()
+      return this.rows()[rowIndex].includes(1);
     },
 
-    // test if any rows on this board contain conflicts
+    // test all rows on this board, if contains conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      //run hasRowConflictAt on all rows
+      var boolean = false;
+      this.rows().forEach((row, index) => {
+        console.log(this);
+        if (this.hasRowConflictAt(index)) {
+         boolean = true;
+        }
+      });
+      return boolean; // fixme
     },
 
 
@@ -94,11 +111,13 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      //check if column index contains piece
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      //checks if all columns with hasColConflictAt
       return false; // fixme
     },
 
