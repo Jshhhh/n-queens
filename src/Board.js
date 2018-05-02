@@ -86,9 +86,11 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      //if more than 1 piece exists in
-      // this.row()[rowIndex].includes()
-      return this.rows()[rowIndex].includes(1);
+      let counter = 0;
+      this.rows()[rowIndex].forEach( element => {
+        element === 1 && counter++;
+      });
+      return counter > 1;
     },
 
     // test all rows on this board, if contains conflicts
@@ -111,13 +113,19 @@
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
       //check if column index contains piece
-      var hasConflict = false;
-      this.rows().forEach(row => {
-        if (row[colIndex] === 1) {
-          hasConflict = true;
-        }
+      // var hasConflict = false;
+      // this.rows().forEach(row => {
+      //   if (row[colIndex] === 1) {
+      //     hasConflict = true;
+      //   }
+      // });
+      // return hasConflict;
+
+      let counter = 0;
+      this.rows().forEach( row => {
+        row[colIndex] === 1 && counter++;
       });
-      return hasConflict;
+      return counter > 1;
     },
 
     // test if any columns on this board contain conflicts
