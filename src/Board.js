@@ -113,7 +113,7 @@
       //check if column index contains piece
       var hasConflict = false;
       this.rows().forEach(row => {
-        if(row[colIndex] === 1) {
+        if (row[colIndex] === 1) {
           hasConflict = true;
         }
       });
