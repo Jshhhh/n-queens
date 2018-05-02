@@ -94,14 +94,13 @@
     // test all rows on this board, if contains conflicts
     hasAnyRowConflicts: function() {
       //run hasRowConflictAt on all rows
-      var boolean = false;
+      var hasConflict = false;
       this.rows().forEach((row, index) => {
-        console.log(this);
         if (this.hasRowConflictAt(index)) {
-          boolean = true;
+          hasConflict = true;
         }
       });
-      return boolean; // fixmeaaaaaaaa
+      return hasConflict;
     },
 
 
@@ -112,13 +111,25 @@
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
       //check if column index contains piece
-      return false; // fixme
+      var hasConflict = false;
+      this.rows().forEach(row => {
+        if(row[colIndex] === 1) {
+          hasConflict = true;
+        }
+      });
+      return hasConflict;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
       //checks if all columns with hasColConflictAt
-      return false; // fixme
+      var hasConflict = false;
+      this.rows().forEach((row, index) => {
+        if (this.hasColConflictAt(index)) {
+          hasConflict = true;
+        }
+      });
+      return hasConflict;
     },
 
 
