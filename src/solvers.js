@@ -20,15 +20,7 @@ window.findNRooksSolution = function(n) {
 
   for (var i = 0; i < n; i++) {
     for (var j = 0; j < n; j++) {
-      // if (!solution.hasAnyRooksConflicts()) {
-      //   solution.togglePiece(i, j);
-      // }
-
-      // !!! Justin, i woke up thinking about this secion, we don't need code above
-      // we should always set the piece and then check if there is a collision after
-      // the if statement above doesn't do anything !!!
       solution.togglePiece(i, j);
-
       if (solution.hasAnyRooksConflicts()) {
         solution.togglePiece(i, j);
       }
@@ -41,10 +33,27 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solution = new Board({n: n});
+  var count = 0;
+  var helper = function(row) {
+    if (row === n) {
+      return;
+    }
+    for (var i = 0; i < n; i++) {
+      solution.togglePiece(row, i);
+      if (solution.hasAnyRooksConflicts()) {
+        solution.togglePiece(row, i);
+      }
+      helper(row + 1);
+    }
+    if (!solution.hasAnyRooksConflicts()) {
+      helper(row + 1);
+    }
+  };
+  helper(0);
 
-  console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
-  return solutionCount;
+  console.log('Number of solutions for ' + n + ' rooks:', count);
+  return count;
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
