@@ -187,9 +187,7 @@
       }
       return hasConflict;
     }
-
     /*--------------------  End of Helper Functions  ---------------------*/
-
 
   });
 
