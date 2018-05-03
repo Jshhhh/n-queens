@@ -20,9 +20,15 @@ window.findNRooksSolution = function(n) {
 
   for (var i = 0; i < n; i++) {
     for (var j = 0; j < n; j++) {
-      if (!solution.hasAnyRooksConflicts()) {
-        solution.togglePiece(i, j);
-      }
+      // if (!solution.hasAnyRooksConflicts()) {
+      //   solution.togglePiece(i, j);
+      // }
+
+      // !!! Justin, i woke up thinking about this secion, we don't need code above
+      // we should always set the piece and then check if there is a collision after
+      // the if statement above doesn't do anything !!!
+      solution.togglePiece(i, j);
+
       if (solution.hasAnyRooksConflicts()) {
         solution.togglePiece(i, j);
       }
