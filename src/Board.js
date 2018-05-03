@@ -113,14 +113,6 @@
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
       //check if column index contains piece
-      // var hasConflict = false;
-      // this.rows().forEach(row => {
-      //   if (row[colIndex] === 1) {
-      //     hasConflict = true;
-      //   }
-      // });
-      // return hasConflict;
-
       let counter = 0;
       this.rows().forEach( row => {
         row[colIndex] === 1 && counter++;
@@ -146,13 +138,30 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    // var fri = majorDiagonalColumnIndexAtFirstRow;
+    hasMajorDiagonalConflictAt: function(fri) {
+      // return false; // fixme
+      // var size = this.rows().length - 1;
+      var counter = 0;
+      this.rows().forEach( (row, index) => {
+        // console.log('index', index, 'fri', fri);
+        if (row[index + 1][fri] === 1) {
+          counter++;
+          fri++;
+        }
+      });
+      return counter > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var hasConflict = false;
+      this.rows().forEach((row, index) => {
+        if (this.hasMajorDiagonalConflictAt(index)) {
+          hasConflict = true;
+        }
+      });
+      return hasConflict;
     },
 
 
