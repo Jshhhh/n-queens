@@ -170,7 +170,7 @@
     hasMinorDiagonalConflictAt: function(fri) {
       var counter = 0;
       this.rows().forEach( (row, index) => {
-        if (this.rows[index][fri - index] === 1) {
+        if (this.rows()[index][fri - index] === 1) {
           counter++;
         }
       });
@@ -179,7 +179,13 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var hasConflict = false;
+      for (var i = 0; i < (this.rows().length - 1) * 2; i++ ) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          hasConflict = true;
+        }
+      }
+      return hasConflict;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
